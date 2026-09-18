@@ -22,7 +22,7 @@ RUN pip install --no-cache-dir --index-url https://download.pytorch.org/whl/cpu 
 
 # Points at the rolling "champion" release tag (its assets get replaced on each promotion, see
 # promote.yml), not a fixed version - this default should never need editing again after this.
-ENV CHAMPION_WEIGHTS_URL="https://github.com/JShi12/vehicleDD/releases/download/champion/best.pt" \
+ENV CHAMPION_WEIGHTS_URL="https://github.com/JShi12/vehicle-damage-detection/releases/download/champion/best.pt" \
     PORT=8000
 
 USER appuser

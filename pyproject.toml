@@ -30,7 +30,7 @@ cardd-evaluate = "cardd.cli.evaluate:main"
 cardd-promote = "cardd.cli.promote:main"
 
 [project.urls]
-Source = "https://github.com/JShi12/vehicleDD"
+Source = "https://github.com/JShi12/vehicle-damage-detection"
 
 [tool.setuptools.packages.find]
 where = ["src"]

@@ -1,6 +1,6 @@
 # Vehicle Damage Detection — CarDD
 
-[![CI](https://github.com/JShi12/vehicleDD/actions/workflows/ci.yml/badge.svg)](https://github.com/JShi12/vehicleDD/actions/workflows/ci.yml)
+[![CI](https://github.com/JShi12/vehicle-damage-detection/actions/workflows/ci.yml/badge.svg)](https://github.com/JShi12/vehicle-damage-detection/actions/workflows/ci.yml)
 
 **🔗 Live demo: [cardd-149g.onrender.com/docs](https://cardd-149g.onrender.com/docs)** - try
 `/predict` with your own image. The demo runs on Render's free tier, so allow ~1 min for cold start if it's been idle, and see [Known limitations](#known-limitations) before judging response time.
@@ -257,7 +257,7 @@ has been completed and approved by a human:
 
 A workflow file in a repo doesn't prove it actually works - it could just describe an untested,
 aspirational process. This one has actually been run, for real, on GitHub's own infrastructure:
-**[PR #1](https://github.com/JShi12/vehicleDD/pull/1)** is the genuine result - `02_cardd_yolo11n_imgsz`
+**[PR #1](https://github.com/JShi12/vehicle-damage-detection/pull/1)** is the genuine result - `02_cardd_yolo11n_imgsz`
 (imgsz=1024) promoted over the original champion on a real recall improvement (0.708 vs 0.685),
 with the actual decision comparison as the PR's own description, reviewed and merged like any
 other change.

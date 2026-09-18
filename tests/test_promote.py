@@ -97,7 +97,7 @@ def test_build_champion_pointer_shape():
         run_name="03_tuned",
         release_tag="champion-03_tuned-20260101",
         rolling_release_tag="champion",
-        weights_url="https://github.com/JShi12/vehicleDD/releases/download/champion/best.pt",
+        weights_url="https://github.com/JShi12/vehicle-damage-detection/releases/download/champion/best.pt",
         git_sha="abc1234",
     )
     assert pointer["run_name"] == "03_tuned"
@@ -181,7 +181,7 @@ def test_apply_promotion_writes_all_files(tmp_path):
         readme_path=readme_path,
         release_tag="champion-03_tuned-20260101",
         rolling_release_tag="champion",
-        weights_url="https://github.com/JShi12/vehicleDD/releases/download/champion/best.pt",
+        weights_url="https://github.com/JShi12/vehicle-damage-detection/releases/download/champion/best.pt",
         git_sha="abc1234",
         model_card_path=model_card_path,
     )

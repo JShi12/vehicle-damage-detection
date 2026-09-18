@@ -3,7 +3,7 @@
   "run_name": "02_cardd_yolo11n_imgsz",
   "release_tag": "champion-challenger-02_cardd_yolo11n_imgsz-20260908-v2",
   "rolling_release_tag": "champion",
-  "weights_url": "https://github.com/JShi12/vehicleDD/releases/download/champion-challenger-02_cardd_yolo11n_imgsz-20260908-v2/best.pt",
+  "weights_url": "https://github.com/JShi12/vehicle-damage-detection/releases/download/champion-challenger-02_cardd_yolo11n_imgsz-20260908-v2/best.pt",
   "git_sha": "827346f",
   "promoted_at": "2026-09-08T11:10:09.615498+00:00",
   "metrics_path": "models/champion_metrics.json"

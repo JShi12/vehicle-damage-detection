@@ -24,7 +24,7 @@ def test_health(client):
     body = resp.json()
     assert body["status"] == "ok"
     assert body["model_loaded"] is True
-    assert body["source"] == "https://github.com/JShi12/vehicleDD"
+    assert body["source"] == "https://github.com/JShi12/vehicle-damage-detection"
 
 
 def test_predict_returns_well_formed_response(client):

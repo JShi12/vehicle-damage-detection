@@ -24,9 +24,9 @@ champion next. Re-check that prose still makes sense after a promotion changes w
 - **License**: code is [AGPL-3.0](LICENSE) (matching `ultralytics`, a dependency); the model
   weights themselves inherit that license by extension. The CarDD training data has its own,
   separate license that does **not** transfer to this repository - see README's Dataset section.
-- **Built by**: Jing Shi ([repo](https://github.com/JShi12/vehicleDD)).
+- **Built by**: Jing Shi ([repo](https://github.com/JShi12/vehicle-damage-detection)).
 - **Where to get it**: served live via the [inference service](README.md#inference-service), or
-  downloaded directly from the [`champion` release](https://github.com/JShi12/vehicleDD/releases/tag/champion)
+  downloaded directly from the [`champion` release](https://github.com/JShi12/vehicle-damage-detection/releases/tag/champion)
   (a rolling tag - always the current champion, not a fixed version).
 
 ## Intended Use

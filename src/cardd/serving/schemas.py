@@ -30,4 +30,4 @@ class HealthResponse(BaseModel):
     model_loaded: bool
     model_source: str
     git_sha: str | None
-    source: str = "https://github.com/JShi12/vehicleDD"
+    source: str = "https://github.com/JShi12/vehicle-damage-detection"
