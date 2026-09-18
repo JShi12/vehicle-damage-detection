@@ -2,8 +2,11 @@
 
 [![CI](https://github.com/JShi12/vehicle-damage-detection/actions/workflows/ci.yml/badge.svg)](https://github.com/JShi12/vehicle-damage-detection/actions/workflows/ci.yml)
 
-**🔗 Live demo: [cardd-149g.onrender.com/docs](https://cardd-149g.onrender.com/docs)** - try
-`/predict` with your own image. The demo runs on Render's free tier, so allow ~1 min for cold start if it's been idle, and see [Known limitations](#known-limitations) before judging response time.
+**🔗 Live demo: [cardd-ui.onrender.com](https://cardd-ui.onrender.com/)** - upload a photo and see
+detections drawn on it. Raw API: [cardd-149g.onrender.com/docs](https://cardd-149g.onrender.com/docs).
+Both run on Render's free tier as **separate services**, so allow ~1 min for cold start on
+whichever's been idle (worst case, both) - see [Known limitations](#known-limitations) before
+judging response time.
 
 A **production-style computer-vision component** for the visual-damage stage of a vehicle reconditioning assessment system. The project trains a YOLO11 detector on the public [CarDD](https://cardd-ustc.github.io/) dataset and takes the model from **dataset conversion and reproducible experiments through held-out evaluation, model promotion, containerised inference, CI, and live deployment**. 
 
@@ -205,18 +208,23 @@ With no `CHAMPION_WEIGHTS_URL` set, the service falls back to a GitHub Release a
 Dockerfile). **Public deployment is a manual, one-time step, not automated by CI**: build the image,
 push a trained `best.pt` as a GitHub Release asset, and point a host at this repo's `Dockerfile`.
 
-**Live demo**: [cardd-149g.onrender.com/docs](https://cardd-149g.onrender.com/docs) (also linked
-at the top of this README) - Render.com free tier, so see the CPU caveat below before judging
-response time; allow ~1 min for cold start if the service has spun down after 15 min idle.
+**Live API**: [cardd-149g.onrender.com/docs](https://cardd-149g.onrender.com/docs) (Swagger; the
+UI below is the friendlier way to try it, also linked at the top of this README) - Render.com free
+tier, so see the CPU caveat below before judging response time; allow ~1 min for cold start if the
+service has spun down after 15 min idle.
 
 ### Demo UI
 
-`ui/app.py` is a small [Streamlit](https://streamlit.io/) page for trying the API visually -
-upload an image, see the returned boxes drawn on it, instead of reading raw JSON in Swagger's
-`/docs`. It has no model of its own and never imports `cardd`/`ultralytics`/`torch` - it's a plain
-HTTP client of `/health` and `/predict`, exactly like `curl` would be, kept as a **separate**
-process from the API rather than combined into one (avoids fighting over a single `$PORT`, and
-keeps the API independently usable by any other client). Run both locally:
+**Live**: [cardd-ui.onrender.com](https://cardd-ui.onrender.com/). `ui/app.py` is a small
+[Streamlit](https://streamlit.io/) page for trying the API visually - upload an image, see the
+returned boxes drawn on it, instead of reading raw JSON in Swagger's `/docs`. It has no model of
+its own and never imports `cardd`/`ultralytics`/`torch` - it's a plain HTTP client of `/health` and
+`/predict`, exactly like `curl` would be. Deployed as its own **separate** Render service (its own
+`$PORT`, its own cold-start clock) pointed at the API above via an `API_URL` env var, rather than
+combined into one process - keeps the API independently usable by any other client, and avoids the
+two fighting over a single port in one container.
+
+Run both locally the same way, in two terminals:
 
 ```bash
 pip install -e ".[serve,ui]"
@@ -225,10 +233,9 @@ API_URL=http://127.0.0.1:8000 streamlit run ui/app.py            # terminal 2
 ```
 
 `ui/requirements.txt` is separate from the repo-root `requirements.txt` (that one's a frozen
-training-environment snapshot, see Reproducibility notes) - it's what a host like
-[Streamlit Community Cloud](https://streamlit.io/cloud) would install, pointed at `ui/app.py` with
-`API_URL` set to the live Render deployment above. Not yet deployed publicly - `pyproject.toml`'s
-`ui` extra and `tests/test_ui.py` exist either way, for local use or a future deploy.
+training-environment snapshot, see Reproducibility notes) - it's what the Render UI service's build
+actually installs (`pip install -r ui/requirements.txt`), deliberately skipping `cardd` and its
+`ultralytics`/`torch` weight entirely, since this page never needs the model itself.
 
 Verified locally (Docker via `colima`, not just the equivalent local process) and against the live
 deployment: the image builds, boots, and correctly detects damage on real CarDD test images using
