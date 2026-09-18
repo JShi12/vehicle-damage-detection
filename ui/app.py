@@ -75,17 +75,31 @@ st.caption(
     f"Demo client of the real REST API at `{API_URL}` "
     f"([Swagger docs]({API_URL}/docs)) - see the "
     "[repo README](https://github.com/JShi12/vehicle-damage-detection) for the full project. "
-    "This page never touches the model directly; every result below is a live HTTP round trip."
+    "If the API's been idle, it's asleep (free-tier hosting) and the first request wakes it up - "
+    "check **API status** below and wait for it to say `\"status\": \"ok\"` before uploading, "
+    "or the first Detect click will just be the ~1 min wake-up, not a real prediction."
 )
 
-with st.expander("API status"):
-    try:
-        health = requests.get(f"{API_URL}/health", timeout=HEALTH_TIMEOUT_S).json()
+try:
+    health = requests.get(f"{API_URL}/health", timeout=HEALTH_TIMEOUT_S).json()
+    api_ready = health.get("status") == "ok"
+except requests.RequestException as e:
+    health = None
+    api_ready = False
+    health_error = e
+
+# Left collapsed only once the API is confirmed awake and ready - otherwise it's exactly the
+# thing the caption above just told the user to go check, so it should already be open.
+with st.expander("API status", expanded=not api_ready):
+    if health is not None:
         st.json(health)
-    except requests.RequestException as e:
+        if not api_ready:
+            st.info("Status isn't `ok` yet - still starting up. Wait a moment and re-open this.")
+    else:
         st.warning(
-            f"Couldn't reach the API at {API_URL}: {e}. If this is the live Render deployment, "
-            "it may just be waking up from an idle spin-down (free tier, ~1 min cold start)."
+            f"Couldn't reach the API at {API_URL}: {health_error}. If this is the live Render "
+            "deployment, it may just be waking up from an idle spin-down (free tier, ~1 min "
+            "cold start) - wait a bit and refresh the page."
         )
 
 uploaded = st.file_uploader("Upload a vehicle photo", type=["jpg", "jpeg", "png"])
