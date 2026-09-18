@@ -1,0 +1,8 @@
+# Streamlit Community Cloud looks for a requirements.txt in the same directory as the app's main
+# file. Deliberately separate from the repo-root requirements.txt (that one is a frozen `pip
+# freeze` snapshot of the training environment, see README's Reproducibility notes - unrelated
+# purpose, don't merge these). This UI has no cardd/ultralytics/torch dependency at all - it is a
+# plain HTTP client of the deployed API, so it doesn't need the package installed to run.
+streamlit>=1.30
+requests>=2.31
+pillow>=10.0

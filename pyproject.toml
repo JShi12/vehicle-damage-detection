@@ -19,7 +19,8 @@ dependencies = [
 [project.optional-dependencies]
 train = ["mlflow>=2.14", "matplotlib", "pycocotools", "opencv-python", "polars", "albumentations"]
 serve = ["fastapi>=0.110", "uvicorn[standard]>=0.29", "python-multipart", "pillow", "requests"]
-dev = ["pytest>=8", "ruff>=0.4", "httpx", "pillow"]
+ui = ["streamlit>=1.30", "requests>=2.31", "pillow>=10.0"]
+dev = ["pytest>=8", "ruff>=0.4", "httpx", "pillow", "streamlit>=1.30"]
 
 [project.scripts]
 cardd-eda = "cardd.cli.eda:main"

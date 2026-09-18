@@ -32,3 +32,6 @@ dist/
 
 # pytest
 .pytest_cache/
+
+# Streamlit local config/credentials, if ever created project-local instead of in $HOME
+.streamlit/
